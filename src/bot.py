@@ -6,7 +6,6 @@ import pytesseract
 import pyautogui
 import json
 
-
 pytesseract.pytesseract.tesseract_cmd = "OCR/tesseract.exe"
 screenWidth, screenHeight = pyautogui.size()
 
@@ -80,9 +79,9 @@ async def amongus():
                     await member.edit(mute = True)
                 Mute_Member = True
 
-
 with open("token.json") as token_file:
     token = json.load(token_file)["token"]
-
-client.run(token)
-
+if token: 
+    client.run(token)
+else: 
+    print ("[*] Please add token to token.json and restart !!!")
