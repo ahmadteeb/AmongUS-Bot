@@ -20,6 +20,13 @@ if(screenHeight == 1080): #1920x1080
 def Image2Text(Region, _Color=cv2.COLOR_BGR2GRAY, _2blackandwhite=True, debug=False):
     pyautogui.screenshot("Temp/temp.png", region = Region)
     screen_shot = cv2.imread('Temp/temp.png')
+    screen_shot = cv2.cvtColor(screen_shot, _Color)
+    if(_2blackandwhite):
+        screen_shot = cv2.adaptiveThreshold(screen_shot, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 85, 11)
+    Text = pytesseract.image_to_string(screen_shot).split("\n")
+    if(debug):
+        print(Text)
+    return Text[0]
 
 
 global Mute_Member
